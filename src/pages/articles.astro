@@ -1,20 +1,49 @@
 ---
-import { getCollection } from 'astro:content';
-const articles = await getCollection('articles');
----
-<html lang="ja">
-  <head>
-    <title>Articles</title>
-  </head>
-  <body>
-    <h1>Articles</h1>
-    <ul>
-      {articles.map((article) => (
-        <li>
-          <a href={`/articles/${article.slug}/`}>{article.data.title}</a>
-        </li>
-      ))}
-    </ul>
-  </body>
-</html>
+import { getCollection } from "astro:content";
+const articles = await getCollection("articles");
 
+import Layout from "../layouts/Layout.astro";
+import Indent from "../components/utils/Indent.astro";
+---
+
+<Layout>
+  <main>
+    <section>
+      <Indent>
+        <h1>Articles</h1>
+        <Indent>
+          <ul>
+            {
+              articles.map((article) => (
+                <li>
+                  <a href={`/articles/${article.slug}/`}>{article.data.title}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </Indent>
+      </Indent>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: 10vw;
+
+    @media screen and (768px < width) {
+      margin: 1rem;
+      display: grid;
+      align-items: center;
+      justify-items: center;
+    }
+  }
+
+  section {
+    width: 80vw;
+    @media screen and (768px < width) {
+      width: 50vw;
+      padding: 1em;
+    }
+  }
+</style>
