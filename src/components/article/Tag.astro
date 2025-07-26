@@ -1,0 +1,32 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<span>
+  {text}
+</span>
+
+<style>
+  span {
+    background: var(--ya-black);
+    color: var(--ya-green);
+    @media (prefers-color-scheme: dark) {
+      background: var(--ya-less-darker-green);
+      color: black;
+    }
+    margin: 0.2em;
+    font-size: 1em;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+    border-radius: 0.2em;
+  }
+
+  span:hover {
+    background: var(--hover);
+    color: black;
+  }
+</style>

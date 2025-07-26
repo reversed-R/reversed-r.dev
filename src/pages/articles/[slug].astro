@@ -1,8 +1,10 @@
 ---
+import Layout from "../../layouts/Layout.astro";
+import Tag from "../../components/article/Tag.astro";
+
 import { getImage } from "astro:assets";
 import { getCollection } from "astro:content";
 import { render } from "astro:content";
-
 
 export async function getStaticPaths() {
   const articles = await getCollection("articles");
@@ -16,17 +18,132 @@ const { article } = Astro.props;
 const { Content } = await render(article);
 ---
 
-<html lang="ja">
-  <head>
-    <meta charset="utf-8" />
-    <title>{article.data.title}</title>
-  </head>
-  <body>
-    <article>
+<Layout title={article.data.title}>
+  <main>
+    <section>
       <h1>{article.data.title}</h1>
       <time datetime={article.data.date}>{article.data.date}</time>
-      <Content />
-    </article>
-  </body>
-</html>
+      <section>
+        {article.data.tags?.map((tag) => <Tag text={tag} />)}
+      </section>
+      <article>
+        <Content />
+      </article>
+    </section>
+  </main>
+</Layout>
 
+<style>
+  main {
+    margin: 5vw;
+
+    @media screen and (768px < width) {
+      margin: 1rem;
+      display: grid;
+      align-items: center;
+      justify-items: center;
+    }
+  }
+
+  section {
+    width: 90vw;
+    @media screen and (768px < width) {
+      width: 80vw;
+      padding: 1em;
+    }
+  }
+
+  article {
+    display: block;
+    background: whitesmoke;
+    color: black;
+    border-radius: 1em;
+    overflow-wrap: break-word;
+
+    width: auto;
+    max-width: 90vw;
+    padding: 0.75em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+    @media screen and (768px < width) {
+      padding: 1.5em;
+    }
+  }
+
+  article {
+    h1 {
+      margin-top: 0.75em;
+      margin-bottom: 0.75em;
+    }
+
+    h2 {
+      margin-top: 0.75em;
+      margin-bottom: 0.75em;
+    }
+
+    h3 {
+      margin-top: 0.75em;
+      margin-bottom: 0.75em;
+    }
+
+    h4 {
+      margin-top: 0.75em;
+      margin-bottom: 0.75em;
+    }
+
+    h5 {
+      margin-top: 0.75em;
+      margin-bottom: 0.75em;
+    }
+
+    h6 {
+      margin-top: 0.75em;
+      margin-bottom: 0.75em;
+    }
+
+    code {
+      display: inline-block;
+      background: #ddd;
+      overflow-wrap: break-all;
+      padding: 0.2em;
+      border-radius: 0.3em;
+    }
+
+    pre {
+      background: var(--ya-dark);
+      padding: 0.5em;
+      border-radius: 0.5em;
+      overflow: scroll;
+      margin-top: 0.75em;
+      margin-bottom: 0.75em;
+
+      code {
+        display: inline-block;
+        overflow-wrap: break-all;
+        background: var(--ya-dark);
+
+        color: white;
+      }
+    }
+
+    a {
+      color: var(--ya-darker-green);
+    }
+
+    a:hover {
+      color: var(--ya-lighter-hover);
+    }
+  }
+
+  article {
+    blockquote {
+      padding: 0.25em;
+      border-left: 0.6em solid var(--ya-green);
+      border-radius: 0.4em;
+      background: #ddd;
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+    }
+  }
+</style>
