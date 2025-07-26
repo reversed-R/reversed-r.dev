@@ -1,0 +1,33 @@
+---
+interface Props {
+  text: string;
+  uri: string;
+}
+
+const { text, uri }: Props = Astro.props;
+---
+
+<span class="link">
+  <a href={uri}>{text + " >>"}</a>
+</span>
+
+<style>
+  .link {
+    background: var(--ya-black);
+    color: var(--ya-green);
+    @media (prefers-color-scheme: dark) {
+      background: var(--ya-less-darker-green);
+      color: black;
+    }
+    margin: 0.2em;
+    font-size: 1em;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+    border-radius: 0.2em;
+  }
+
+  .link:hover {
+    background: var(--hover);
+    color: black;
+  }
+</style>

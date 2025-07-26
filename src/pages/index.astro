@@ -1,7 +1,28 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import "../styles/global.css";
+
+import Layout from "../layouts/Layout.astro";
+import URILink from "../components/utils/URILink.astro";
+import Indent from "../components/utils/Indent.astro";
 ---
 
 <Layout>
-  <a href="articles">articles</a>
+  <main>
+    <h1>profile</h1>
+
+    <Indent>
+      <h2>affiliation</h2>
+      <p>筑波大学 情報学群 情報科学類 (24年入学)</p>
+
+      <h2>accounts</h2>
+      <Indent>
+        <h3>Twitter:</h3>
+        <URILink text="@reversed_R" uri="https://x.com/reversed_R" />
+        <h3>GitHub:</h3>
+        <URILink text="reversed-R" uri="https://github.com/reversed-R" />
+      </Indent>
+    </Indent>
+
+    <URILink text="articles" uri="articles" />
+  </main>
 </Layout>
