@@ -8,21 +8,58 @@ import Indent from "../components/utils/Indent.astro";
 
 <Layout>
   <main>
-    <h1>profile</h1>
+    <section>
+      <h1>profile:</h1>
 
-    <Indent>
-      <h2>affiliation</h2>
-      <p>筑波大学 情報学群 情報科学類 (24年入学)</p>
-
-      <h2>accounts</h2>
       <Indent>
-        <h3>Twitter:</h3>
-        <URILink text="@reversed_R" uri="https://x.com/reversed_R" />
-        <h3>GitHub:</h3>
-        <URILink text="reversed-R" uri="https://github.com/reversed-R" />
-      </Indent>
-    </Indent>
+        <h2>affiliation:</h2>
+        <Indent>
+          <p>筑波大学 情報学群 情報科学類 (24年入学)</p>
+        </Indent>
 
-    <URILink text="articles" uri="articles" />
+        <h2>accounts:</h2>
+        <Indent>
+          <h3>Twitter:</h3>
+          <Indent>
+            <URILink text="@reversed_R" uri="https://x.com/reversed_R" />
+          </Indent>
+          <h3>GitHub:</h3>
+          <Indent>
+            <URILink text="reversed-R" uri="https://github.com/reversed-R" />
+          </Indent>
+        </Indent>
+      </Indent>
+    </section>
+
+    <section>
+      <h1>pages:</h1>
+      <Indent>
+        <h2>articles:</h2>
+        <Indent>
+          <URILink text="articles" uri="articles" />
+        </Indent>
+      </Indent>
+    </section>
   </main>
 </Layout>
+
+<style>
+  main {
+    margin: 10vw;
+
+    @media screen and (768px < width) {
+      margin: 1rem;
+      display: grid;
+      align-items: center;
+      justify-items: center;
+    }
+  }
+
+  section {
+    width: 80vw;
+    @media screen and (768px < width) {
+      width: 50vw;
+      padding: 1em;
+    }
+  }
+</style>
