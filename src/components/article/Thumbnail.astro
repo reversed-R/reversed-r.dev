@@ -1,16 +1,13 @@
 ---
-import Tag from "./Tag.astro";
 import URILink from "../utils/URILink.astro";
-
 interface Props {
   title: string;
   uri: string;
   date: string;
   description: string | undefined;
-  tags: string[] | undefined;
 }
 
-const { title, uri, date, description, tags } = Astro.props;
+const { title, uri, date, description } = Astro.props;
 ---
 
 <article>
@@ -18,7 +15,7 @@ const { title, uri, date, description, tags } = Astro.props;
   <h2>{date}</h2>
 
   <section>
-    {tags?.map((tag) => <Tag text={tag} />)}
+    <slot />
   </section>
 
   <section>

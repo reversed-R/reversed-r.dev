@@ -1,12 +1,13 @@
 ---
 interface Props {
   text: string;
+  class?: string;
 }
 
-const { text } = Astro.props;
+const { text, class: className = "" } = Astro.props;
 ---
 
-<span>
+<span class={`default-style ${className}`}>
   {text}
 </span>
 
@@ -29,5 +30,9 @@ const { text } = Astro.props;
   span:hover {
     background: var(--hover);
     color: black;
+  }
+
+  span.selected {
+    background: var(--hover);
   }
 </style>

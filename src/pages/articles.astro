@@ -7,6 +7,7 @@ const articles = await getCollection("articles");
 import Layout from "../layouts/Layout.astro";
 import Thumbnail from "../components/article/Thumbnail.astro";
 import URILink from "../components/utils/URILink.astro";
+import Tag from "../components/article/Tag.astro";
 ---
 
 <Layout title="ゃーのブログ">
@@ -42,9 +43,11 @@ import URILink from "../components/utils/URILink.astro";
                 title={article.data.title}
                 uri={`/articles/${article.slug}/`}
                 date={article.data.date}
-                description={article.data.description}
-                tags={article.data.tags}
-              />
+                description={article.data.description}>
+                {article.data.tags?.map((tag) => (
+                  <Tag class:list={["article-tag"]} text={tag} />
+                ))}
+              </Thumbnail>
             </section>
           ))
         }
@@ -56,6 +59,7 @@ import URILink from "../components/utils/URILink.astro";
 <script type="module">
   const tagButtons = document.querySelectorAll(".tag-button");
   const articleItems = document.querySelectorAll(".article-item");
+  const articleTags = document.querySelectorAll(".article-tag");
 
   const selectedTags = new Set();
 
@@ -78,6 +82,16 @@ import URILink from "../components/utils/URILink.astro";
     results.forEach((res) => {
       res.el.style.display = "";
       res.el.parentElement.append(res.el);
+    });
+
+    articleTags.forEach((atag) => {
+      const atagText = atag.innerText;
+
+      if (selectedTags.has(atagText)) {
+        atag.classList.add("selected");
+      } else {
+        atag.classList.remove("selected");
+      }
     });
 
     // クエリパラメータを更新
