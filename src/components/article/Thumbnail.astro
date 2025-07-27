@@ -11,20 +11,22 @@ const { title, uri, date, description } = Astro.props;
 ---
 
 <article>
-  <h1>{title}</h1>
-  <h2>{date}</h2>
+  <a href={uri}>
+    <h1>{title}</h1>
+    <h2>{date}</h2>
 
-  <section>
-    <slot />
-  </section>
+    <section>
+      <slot />
+    </section>
 
-  <section>
-    {description && <p>{description}</p>}
-  </section>
+    <section>
+      {description && <p>{description}</p>}
+    </section>
 
-  <section>
-    <URILink text="Read more ..." uri={uri} />
-  </section>
+    <section>
+      <URILink text="Read more ..." uri={uri} />
+    </section>
+  </a>
 </article>
 
 <style>
