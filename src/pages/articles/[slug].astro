@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import Tag from "../../components/article/Tag.astro";
 import URILink from "../../components/utils/URILink.astro";
+import Header from "../../components/Header.astro";
 
 import { getImage } from "astro:assets";
 import { getCollection } from "astro:content";
@@ -20,6 +21,8 @@ const { Content } = await render(article);
 ---
 
 <Layout title={article.data.title}>
+  <Header />
+
   <main>
     <section>
       <URILink text="Articles" uri="/articles" />
