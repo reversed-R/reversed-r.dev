@@ -1,4 +1,6 @@
 ---
+export const prerender = false;
+
 import { getCollection } from "astro:content";
 const articles = await getCollection("articles");
 
@@ -15,22 +17,105 @@ import URILink from "../components/utils/URILink.astro";
 
     <section>
       <h1>Articles</h1>
+
+      <section>
+        <h2>Filter by Tags</h2>
+
+        <section class="tag-list">
+          {
+            Array.from(new Set(articles.flatMap((a) => a.data.tags ?? [])))
+              .sort()
+              .map((tag) => (
+                <button type="button" class="tag-button" data-tag={tag}>
+                  {tag}
+                </button>
+              ))
+          }
+        </section>
+      </section>
+
       <ul>
         {
           articles.map((article) => (
-            <Thumbnail
-              title={article.data.title}
-              uri={`/articles/${article.slug}/`}
-              date={article.data.date}
-              description={article.data.description}
-              tags={article.data.tags}
-            />
+            <section class="article-item" data-tags={(article.data.tags ?? []).join(",")}>
+              <Thumbnail
+                title={article.data.title}
+                uri={`/articles/${article.slug}/`}
+                date={article.data.date}
+                description={article.data.description}
+                tags={article.data.tags}
+              />
+            </section>
           ))
         }
       </ul>
     </section>
   </main>
 </Layout>
+
+<script type="module">
+  const tagButtons = document.querySelectorAll(".tag-button");
+  const articleItems = document.querySelectorAll(".article-item");
+
+  const selectedTags = new Set();
+
+  function updateArticles() {
+    const results = [];
+
+    articleItems.forEach((item) => {
+      const tags = item.dataset.tags.split(",").filter(Boolean);
+      const matched = Array.from(selectedTags).filter((tag) => tags.includes(tag));
+      const matchedCount = matched.length;
+
+      if (selectedTags.size === 0 || matchedCount > 0) {
+        results.push({ el: item, matchedCount });
+      } else {
+        item.style.display = "none";
+      }
+    });
+
+    results.sort((a, b) => b.matchedCount - a.matchedCount);
+    results.forEach((res) => {
+      res.el.style.display = "";
+      res.el.parentElement.append(res.el);
+    });
+
+    // クエリパラメータを更新
+    const params = new URLSearchParams();
+    selectedTags.forEach((tag) => params.append("tag", tag));
+    const newUrl = `${location.pathname}?${params.toString()}`;
+    history.replaceState({}, "", newUrl);
+  }
+
+  tagButtons.forEach((button) => {
+    const tag = button.dataset.tag;
+
+    button.addEventListener("click", () => {
+      if (selectedTags.has(tag)) {
+        selectedTags.delete(tag);
+        button.classList.remove("selected");
+      } else {
+        selectedTags.add(tag);
+        button.classList.add("selected");
+      }
+      updateArticles();
+    });
+  });
+
+  // 初期化：クエリパラメータから選択状態を復元
+  const urlParams = new URLSearchParams(location.search);
+  const initialTags = urlParams.getAll("tag");
+
+  initialTags.forEach((tag) => {
+    const btn = document.querySelector(`.tag-button[data-tag="${tag}"]`);
+    if (btn) {
+      selectedTags.add(tag);
+      btn.classList.add("selected");
+    }
+  });
+
+  updateArticles();
+</script>
 
 <style>
   main {
@@ -50,5 +135,35 @@ import URILink from "../components/utils/URILink.astro";
       width: 80vw;
       padding: 1em;
     }
+  }
+
+  .tag-list {
+    padding: 0.5em;
+    width: auto;
+  }
+
+  .article-item {
+    padding: 0;
+  }
+
+  .tag-button {
+    border: 0 solid;
+    margin: 0.25em;
+    padding: 0.3em 0.6em;
+    border-radius: 0.2em;
+    background: var(--ya-green);
+    color: black;
+    cursor: pointer;
+  }
+  .tag-button:hover {
+    color: var(--ya-green);
+    background: black;
+  }
+  .tag-button.selected {
+    background: var(--hover);
+  }
+  .tag-button.selected:hover {
+    color: var(--ya-green);
+    background: black;
   }
 </style>
