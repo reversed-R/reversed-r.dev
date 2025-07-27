@@ -3,33 +3,33 @@ import { getCollection } from "astro:content";
 const articles = await getCollection("articles");
 
 import Layout from "../layouts/Layout.astro";
-import Indent from "../components/utils/Indent.astro";
+import Thumbnail from "../components/article/Thumbnail.astro";
 ---
 
 <Layout title="ゃーのブログ">
   <main>
     <section>
-      <Indent>
-        <h1>Articles</h1>
-        <Indent>
-          <ul>
-            {
-              articles.map((article) => (
-                <li>
-                  <a href={`/articles/${article.slug}/`}>{article.data.title}</a>
-                </li>
-              ))
-            }
-          </ul>
-        </Indent>
-      </Indent>
+      <h1>Articles</h1>
+      <ul>
+        {
+          articles.map((article) => (
+            <Thumbnail
+              title={article.data.title}
+              uri={`/articles/${article.slug}/`}
+              date={article.data.date}
+              description={article.data.description}
+              tags={article.data.tags}
+            />
+          ))
+        }
+      </ul>
     </section>
   </main>
 </Layout>
 
 <style>
   main {
-    margin: 10vw;
+    margin: 5vw;
 
     @media screen and (768px < width) {
       margin: 1rem;
@@ -40,9 +40,9 @@ import Indent from "../components/utils/Indent.astro";
   }
 
   section {
-    width: 80vw;
+    width: 90vw;
     @media screen and (768px < width) {
-      width: 50vw;
+      width: 80vw;
       padding: 1em;
     }
   }
