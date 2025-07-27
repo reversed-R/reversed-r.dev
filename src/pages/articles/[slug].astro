@@ -29,7 +29,7 @@ const { Content } = await render(article);
       <h1>{article.data.title}</h1>
       <time datetime={article.data.date}>{article.data.date}</time>
       <section>
-        {article.data.tags?.map((tag) => <Tag text={tag} />)}
+        {article.data.tags?.map((tag) => <Tag text={tag} uri={`/articles?tag=${tag}`} />)}
       </section>
       <article>
         <Content />

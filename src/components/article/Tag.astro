@@ -1,14 +1,17 @@
 ---
 interface Props {
   text: string;
+  uri?: string;
   class?: string;
 }
 
-const { text, class: className = "" } = Astro.props;
+const { text, uri, class: className = "" } = Astro.props;
 ---
 
 <span class={`default-style ${className}`}>
-  {text}
+  <a href={uri}>
+    {text}
+  </a>
 </span>
 
 <style>
