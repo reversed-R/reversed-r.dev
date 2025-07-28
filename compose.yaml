@@ -1,0 +1,21 @@
+#timestamp:20250728073339974892126:
+
+services:
+  website:
+    image: ghcr.io/reversed-r/reversed-r.dev/reversed-r.dev:latest
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: "traefik"
+      traefik.http.services.website.loadbalancer.server.scheme: http
+      traefik.http.routers.website.rule: Host(`reversed-r.dev`)
+      traefik.http.routers.website.entrypoints: websecure,web
+      traefik.http.routers.website.tls.certResolver: leresolver
+      traefik.http.routers.website.service: website
+    restart: always
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    name: traefik
+    external: true
