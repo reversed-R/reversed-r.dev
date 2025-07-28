@@ -2,7 +2,7 @@
 title: "Next.js意味ないのでAstro.jsで置き換えた"
 date: "2025-07-28"
 description: "更新しないブログ、意味ない"
-tags: ["Web", Astro.js", "Next.js", "Markdown", "GitHub Actions", "Portainer"]
+tags: ["Web", "Astro.js", "Next.js", "Markdown", "GitHub Actions", "Portainer"]
 ---
 
 こんにちは、ゃーです。
