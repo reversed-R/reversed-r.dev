@@ -2,10 +2,18 @@
 import "../styles/global.css";
 
 interface Props {
-  title: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  url?: string;
 }
 
-const { title }: Props = Astro.props;
+const {
+  title = "ゃーのホームページ",
+  description = "ゃーのホームページです",
+  image = "/icon.svg",
+  url = "https://reversed-r.dev",
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -21,6 +29,16 @@ const { title }: Props = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap"
       rel="stylesheet"
     />
+
+    <meta name="description" content={description} />
+
+    <!-- OGP -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={url} />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <slot />
