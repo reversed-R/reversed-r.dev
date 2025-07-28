@@ -1,0 +1,41 @@
+---
+import Layout from "../layouts/Layout.astro";
+import URILink from "../components/utils/URILink.astro";
+import Indent from "../components/utils/Indent.astro";
+import Header from "../components/Header.astro";
+---
+
+<Layout title="ゃーのホームページ">
+  <Header />
+
+  <main>
+    <section>
+      <h1>404 Not Found</h1>
+
+      <Indent>
+        <p>/blog/articles/*は <URILink text="/articles" uri="/articles" /> に移動しました</p>
+      </Indent>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: 10vw;
+
+    @media screen and (768px < width) {
+      margin: 1rem;
+      display: grid;
+      align-items: center;
+      justify-items: center;
+    }
+  }
+
+  section {
+    width: 80vw;
+    @media screen and (768px < width) {
+      width: 50vw;
+      padding: 1em;
+    }
+  }
+</style>
