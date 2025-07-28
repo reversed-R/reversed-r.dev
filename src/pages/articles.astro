@@ -34,19 +34,21 @@ import Header from "../components/Header.astro";
 
       <ul>
         {
-          articles.map((article) => (
-            <section class="article-item" data-tags={(article.data.tags ?? []).join(",")}>
-              <Thumbnail
-                title={article.data.title}
-                uri={`/articles/${article.slug}/`}
-                date={article.data.date}
-                description={article.data.description}>
-                {article.data.tags?.map((tag) => (
-                  <span class="article-tag">{tag}</span>
-                ))}
-              </Thumbnail>
-            </section>
-          ))
+          articles
+            .sort((a1, a2): number => new Date(a2.data.date).getTime() - new Date(a1.data.date).getTime())
+            .map((article) => (
+              <section class="article-item" data-tags={(article.data.tags ?? []).join(",")}>
+                <Thumbnail
+                  title={article.data.title}
+                  uri={`/articles/${article.slug}/`}
+                  date={article.data.date}
+                  description={article.data.description}>
+                  {article.data.tags?.map((tag) => (
+                    <span class="article-tag">{tag}</span>
+                  ))}
+                </Thumbnail>
+              </section>
+            ))
         }
       </ul>
     </section>
