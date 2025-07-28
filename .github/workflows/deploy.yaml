@@ -22,6 +22,8 @@ jobs:
         id: tag
         run: echo "time=$(date +%Y%m%d%H%M%S%9N)" >> $GITHUB_OUTPUT
 
+      - name: Convert User Name to Lower Case
+        run: echo "::set-output name=lower_repo::$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')"
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
