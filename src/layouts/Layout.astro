@@ -39,8 +39,17 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={baseURL + image} />
+    <meta property="og:image:width" content="120" />
+    <meta property="og:image:height" content="120" />
     <meta property="og:url" content={baseURL + path} />
+
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@reversed_R" />
+    <meta name="twitter:creator" content="@reversed_R" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={baseURL + image} />
+    <meta name="twitter:image:alt" content="ゃーのホームページのアイコン" />
   </head>
   <body>
     <slot />
