@@ -2,8 +2,7 @@
 
 services:
   website:
-    image: ghcr.io/reversed-R/reversed-r.dev/reversed-r.dev:latest
-    build: .
+    image: ghcr.io/reversed-r/reversed-r.dev/reversed-r.dev:latest
     labels:
       traefik.enable: "true"
       traefik.docker.network: "traefik"
