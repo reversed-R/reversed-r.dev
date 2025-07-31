@@ -2,7 +2,7 @@
 title: "Next.jsでマークダウンで書けるブログページをホスティングや！"
 date: "2024-12-02"
 description: "君も思うだろう？マークダウンでブログを書きたいなって。"
-tags: ["Web", "Next.js", "React", "markdown"]
+tags: ["Web", "Next.js", "React", "Markdown"]
 ---
 
 やぁ、こんにちは。ゃーです。
