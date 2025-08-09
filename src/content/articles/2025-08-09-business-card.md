@@ -46,7 +46,7 @@ Dockerコンテナ群を管理するためにPortainerなどはいるものの�
 `compose.yaml`を錬成してやる必要がありますが、
 [PenpotのGitHubリポジトリ](https://github.com/penpot/penpot)の[ここ](https://github.com/penpot/penpot/blob/develop/docker/images/docker-compose.yaml)にあります。概ねこれをパクってくれば良いです。
 
-筆者は次のように書きました([ゃーのPenpotのセルフホスト用コンフィグのGitHubリポジトリ](github.com/reversed-R/penpot.reversed-r.dev)にもあります)。
+筆者は次のように書きました([ゃーのPenpotのセルフホスト用コンフィグのGitHubリポジトリ](https://github.com/reversed-R/penpot.reversed-r.dev)にもあります)。
 traefikのルーティング用ラベルなどが付いてます。
 
 ```yaml
@@ -147,7 +147,7 @@ networks:
 
 あと、DBがPostgresとRedisがいるのは、(挙動的にも)おそらくPostgresがユーザー登録用でRedisがデザインファイル自体の保存用なのでしょう(勝手に推測してるだけなのでわかりませんが)。
 
-なにはともあれこうしてホストできました。[penpot.reversed-r.dev](penpot.reversed-r.dev)にて公開されており、別にアカウント登録もできる状態になっていますが、データの永続化や様々について何も保証しないので非推奨です。
+なにはともあれこうしてホストできました。[penpot.reversed-r.dev](https://penpot.reversed-r.dev)にて公開されており、別にアカウント登録もできる状態になっていますが、データの永続化や様々について何も保証しないので非推奨です。
 
 # ホストできたのでデザインしまくった
 
