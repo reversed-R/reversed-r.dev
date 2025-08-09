@@ -1,7 +1,7 @@
 ---
 title: "セキュキャンのために名刺を作るためにデザインソフトをセルフホストする"
 date: "2025-08-09"
-description: ""
+description: "Penpotってやつ"
 tags: ["on-premise", "penpot", "Docker"]
 thumbnailImage: "thumbnail-image.png"
 ---
