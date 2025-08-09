@@ -20,7 +20,11 @@ const { article } = Astro.props;
 const { Content } = await render(article);
 ---
 
-<Layout title={article.data.title} description={article.data.description} path={`/articles/${article.slug}/`}>
+<Layout
+  title={article.data.title}
+  description={article.data.description}
+  path={`/articles/${article.slug}/`}
+  image={article.data.thumbnailImage && `/images/articles/${article.slug}/${article.data.thumbnailImage}`}>
   <Header />
 
   <main>
